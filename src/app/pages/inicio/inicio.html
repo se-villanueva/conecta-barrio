@@ -1,0 +1,32 @@
+<section class="hero">
+  <h1>Todas las solicitudes de tu comunidad, en un solo lugar</h1>
+  <p>ConectaBarrio ayuda a RedManos a encontrar, priorizar y registrar solicitudes de los barrios sin perderlas entre mensajes dispersos.</p>
+  <div class="acciones">
+    <a class="btn" routerLink="/solicitudes">Ver solicitudes</a>
+    <a class="btn btn-sec" routerLink="/solicitudes/nueva">Registrar nueva</a>
+  </div>
+</section>
+
+<section aria-labelledby="resumen">
+  <h2 id="resumen">Resumen operativo</h2>
+  <div class="indicadores">
+    <div class="indicador">
+      <strong>{{ servicio.cargando() ? '…' : servicio.totalSolicitudes() }}</strong>
+      <span>Solicitudes cargadas</span>
+    </div>
+    <div class="indicador">
+      <strong>{{ servicio.totalPrioritarias() }}</strong>
+      <span>Prioritarias</span>
+    </div>
+  </div>
+  @if (servicio.cargando()) {
+    <p role="status"><span class="spinner"></span>Conectando con la API…</p>
+  } @else if (servicio.error()) {
+    <div class="aviso error" role="alert">
+      {{ servicio.error() }}
+      <button type="button" class="btn" (click)="servicio.cargarSolicitudes(true)">Reintentar</button>
+    </div>
+  }
+</section>
+
+<p class="aviso">Versión demostrativa: los datos provienen de JSONPlaceholder y las solicitudes nuevas se simulan, por lo que no se conservan al recargar la página.</p>

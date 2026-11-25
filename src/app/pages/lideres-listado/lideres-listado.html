@@ -1,0 +1,22 @@
+<h1>Líderes comunitarios</h1>
+@if (servicio.cargando()) {
+  <p class="estado" role="status"><span class="spinner"></span>Consultando líderes…</p>
+} @else if (servicio.error()) {
+  <div class="aviso error" role="alert">
+    <p>{{ servicio.error() }}</p>
+    <button type="button" class="btn" (click)="servicio.cargarLideres(true)">Reintentar</button>
+  </div>
+} @else if (servicio.cargada() && servicio.lideres().length === 0) {
+  <p class="estado">No hay líderes registrados.</p>
+} @else {
+  <div class="grilla">
+    @for (l of servicio.lideres(); track l.id) {
+      <article class="lider">
+        <h2>{{ l.name }}</h2>
+        <p><a [href]="'mailto:' + l.email">{{ l.email }}</a></p>
+        <p>{{ l.phone }}</p>
+        <p>{{ l.address.city }} · {{ l.company.name }}</p>
+      </article>
+    }
+  </div>
+}

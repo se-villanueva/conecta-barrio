@@ -1,0 +1,4 @@
+.buscador { display: flex; flex-direction: column; gap: var(--s-1); max-width: 480px; margin-bottom: var(--s-4); }
+label { font-weight: 600; }
+input { min-height: 44px; padding: .5rem .75rem; border: 2px solid var(--c-borde); border-radius: var(--radio); font: inherit; width: 100%; }
+.cantidad { color: var(--c-suave); }

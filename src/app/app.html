@@ -1,0 +1,12 @@
+<header class="cabecera">
+  <a routerLink="/" class="marca">Conecta<span>Barrio</span></a>
+  <nav aria-label="Principal">
+    <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+    <a routerLink="/solicitudes" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }">Solicitudes</a>
+    <a routerLink="/solicitudes/nueva" routerLinkActive="activo">Nueva solicitud</a>
+    <a routerLink="/lideres" routerLinkActive="activo">Líderes</a>
+  </nav>
+  <span class="contador" aria-live="polite">★ Prioritarias: {{ solicitudes.totalPrioritarias() }}</span>
+</header>
+<main><router-outlet /></main>
+<footer class="pie">ConectaBarrio · MVP demostrativo para RedManos · Datos de JSONPlaceholder (simulados)</footer>

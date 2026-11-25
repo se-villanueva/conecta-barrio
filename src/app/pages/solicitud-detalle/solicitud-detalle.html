@@ -1,0 +1,33 @@
+<a routerLink="/solicitudes">← Volver al listado</a>
+
+@if (servicio.cargando() || (!servicio.cargada() && !servicio.error())) {
+  <p class="estado" role="status"><span class="spinner"></span>Cargando caso…</p>
+} @else if (servicio.error()) {
+  <div class="aviso error" role="alert">
+    <p>{{ servicio.error() }}</p>
+    <button type="button" class="btn" (click)="servicio.cargarSolicitudes(true)">Reintentar</button>
+  </div>
+} @else if (solicitud(); as s) {
+  <article class="detalle">
+    <p class="caso">Caso #{{ s.id }}</p>
+    <h1>{{ s.title }}</h1>
+    <p>{{ s.body }}</p>
+    <section>
+      <h2>Líder relacionado</h2>
+      @if (lider(); as l) {
+        <p>{{ l.name }} · <a [href]="'mailto:' + l.email">{{ l.email }}</a> · {{ l.phone }}</p>
+      } @else {
+        <p>Información del líder no disponible.</p>
+      }
+    </section>
+    <button type="button" class="btn" [attr.aria-pressed]="servicio.esPrioritaria(s.id)" (click)="servicio.alternarPrioridad(s.id)">
+      {{ servicio.esPrioritaria(s.id) ? '★ Prioritaria (quitar)' : '☆ Marcar como prioritaria' }}
+    </button>
+  </article>
+} @else {
+  <div class="estado">
+    <h1>Caso no encontrado</h1>
+    <p>No existe una solicitud con el id «{{ id() }}».</p>
+    <a class="btn" routerLink="/solicitudes">Ir al listado</a>
+  </div>
+}

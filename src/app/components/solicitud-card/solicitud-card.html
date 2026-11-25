@@ -1,0 +1,11 @@
+<article class="card" [class.prioritaria]="prioritaria()">
+  <p class="caso">Caso #{{ solicitud().id }}</p>
+  <h2>{{ solicitud().title }}</h2>
+  <p class="resumen">{{ solicitud().body }}</p>
+  <div class="acciones">
+    <a class="btn btn-sec" [routerLink]="['/solicitudes', solicitud().id]" [attr.aria-label]="'Ver detalle del caso ' + solicitud().id">Ver detalle</a>
+    <button type="button" class="btn btn-sec" [attr.aria-pressed]="prioritaria()" (click)="alternarPrioridad.emit(solicitud().id)">
+      {{ prioritaria() ? '★ Prioritaria' : '☆ Marcar prioridad' }}
+    </button>
+  </div>
+</article>

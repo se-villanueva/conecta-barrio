@@ -1,0 +1,3 @@
+.lider { background: var(--c-superficie); border: 1px solid var(--c-borde); border-radius: var(--radio); padding: var(--s-4); box-shadow: var(--sombra); }
+.lider h2 { margin: 0 0 var(--s-2); font-size: 1.1rem; }
+.lider p { margin: var(--s-1) 0; overflow-wrap: anywhere; }

@@ -1,0 +1,5 @@
+.hero { background: var(--c-superficie); border: 1px solid var(--c-borde); border-radius: var(--radio); padding: var(--s-5) var(--s-4); box-shadow: var(--sombra); }
+.acciones { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-4); }
+.indicadores { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: var(--s-4); margin: var(--s-3) 0; }
+.indicador { background: var(--c-superficie); border: 1px solid var(--c-borde); border-radius: var(--radio); padding: var(--s-4); display: flex; flex-direction: column; }
+.indicador strong { font-size: 2.2rem; color: var(--c-primario); }

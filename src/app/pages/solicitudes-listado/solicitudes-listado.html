@@ -1,0 +1,28 @@
+<h1>Solicitudes comunitarias</h1>
+<div class="buscador">
+  <label for="q">Buscar por título o contenido</label>
+  <input id="q" type="search" placeholder="Ej: limpieza, escuela…" [value]="busqueda()" (input)="busqueda.set($any($event.target).value)" />
+</div>
+
+@if (servicio.cargando()) {
+  <p class="estado" role="status"><span class="spinner"></span>Consultando solicitudes…</p>
+} @else if (servicio.error()) {
+  <div class="aviso error" role="alert">
+    <p>{{ servicio.error() }}</p>
+    <button type="button" class="btn" (click)="reintentar()">Reintentar</button>
+  </div>
+} @else if (servicio.cargada() && servicio.totalSolicitudes() === 0) {
+  <p class="estado">Aún no hay solicitudes. <a routerLink="/solicitudes/nueva">Registra la primera</a>.</p>
+} @else if (servicio.cargada() && filtradas().length === 0) {
+  <div class="estado">
+    <p>No hay coincidencias para «{{ busqueda() }}».</p>
+    <button type="button" class="btn btn-sec" (click)="busqueda.set('')">Limpiar búsqueda</button>
+  </div>
+} @else if (servicio.cargada()) {
+  <p class="cantidad" aria-live="polite">Mostrando {{ filtradas().length }} de {{ servicio.totalSolicitudes() }} solicitudes</p>
+  <div class="grilla">
+    @for (s of filtradas(); track s.id) {
+      <app-solicitud-card [solicitud]="s" [prioritaria]="servicio.prioritarios().has(s.id)" (alternarPrioridad)="servicio.alternarPrioridad($event)" />
+    }
+  </div>
+}
